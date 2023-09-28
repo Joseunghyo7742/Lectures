@@ -19,17 +19,15 @@
       }
       .buttons {
         display: flex;
+        position: fixed;
+        top: 20px;
+        right: 20px;
         justify-content: end;
         gap: 5px;
       }
     </style>
   </head>
   <body>
-    <div class="buttons">
-      <button onclick="ScrollBy()">Scroll by 100px(y)</button>
-      <button onclick="ScrollTo()">Scroll to 100px(y)</button>
-      <button onclick="ScrollInto()">Scroll into special</button>
-    </div>
     <div class="box"></div>
     <div class="box"></div>
     <div class="box"></div>
@@ -38,17 +36,30 @@
     <div class="box"></div>
     <div class="box"></div>
     <div class="box"></div>
+    <aside class="buttons">
+      <button class="scroll-by">Scroll by 100px(y)</button>
+      <button class="scroll-to">Scroll to 100px(y)</button>
+      <button class="scroll-into">Scroll into special</button>
+    </aside>
     <script>
       const target = document.querySelector('.special');
-      function ScrollTo() {
-        scroll(0, 100);
-      }
-      function ScrollInto() {
+      const scrollBy = document.querySelector('.scroll-by');
+      const scrollTo = document.querySelector('.scroll-to');
+      const scrollInto = document.querySelector('.scroll-into');
+
+      scrollBy.addEventListener('click', () => {
+        window.scrollBy({
+          top: 100,
+          left: 0,
+          behavior: 'smooth',
+        });
+      }); //mdn javascript scroll
+      scrollTo.addEventListener('click', () => {
+        window.scrollTo(0, 100);
+      });
+      scrollInto.addEventListener('click', () => {
         target.scrollIntoView();
-      }
-      function ScrollBy() {
-        window.scrollBy(0, 100);
-      }
+      });
     </script>
   </body>
 </html>
