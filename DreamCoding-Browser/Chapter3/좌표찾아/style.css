@@ -1,0 +1,26 @@
+body {
+  background-color: black;
+}
+img {
+  width: 70x;
+  height: 70px;
+  position: relative;
+}
+
+.coordinate {
+  position: relative;
+  left: 50px;
+  bottom: 30px;
+  color: white;
+}
+
+.line-h {
+  position: relative;
+  border-top: 1px solid white;
+  width: 100%;
+}
+.line-v {
+  position: absolute;
+  border-left: 1px solid white;
+  height: 100%;
+}
