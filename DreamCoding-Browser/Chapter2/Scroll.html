@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Coordinates</title>
+    <style>
+      body {
+        background-color: black;
+      }
+      .box {
+        background-color: antiquewhite;
+        width: 150px;
+        height: 150px;
+        margin: 10px 0;
+      }
+      .special {
+        background-color: cadetblue;
+      }
+      .buttons {
+        display: flex;
+        justify-content: end;
+        gap: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="buttons">
+      <button onclick="ScrollBy()">Scroll by 100px(y)</button>
+      <button onclick="ScrollTo()">Scroll to 100px(y)</button>
+      <button onclick="ScrollInto()">Scroll into special</button>
+    </div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box special"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <script>
+      const target = document.querySelector('.special');
+      function ScrollTo() {
+        scroll(0, 100);
+      }
+      function ScrollInto() {
+        target.scrollIntoView();
+      }
+      function ScrollBy() {
+        window.scrollBy(0, 100);
+      }
+    </script>
+  </body>
+</html>
