@@ -4,23 +4,31 @@ body {
 img {
   width: 70x;
   height: 70px;
-  position: relative;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .coordinate {
-  position: relative;
-  left: 50px;
-  bottom: 30px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(20px, 20px);
   color: white;
 }
 
 .line-h {
-  position: relative;
-  border-top: 1px solid white;
+  position: absolute;
+  background-color: white;
   width: 100%;
+  top: 50%;
+  height: 1px;
 }
 .line-v {
   position: absolute;
-  border-left: 1px solid white;
+  background-color: white;
   height: 100%;
+  width: 1px;
+  left: 50%;
 }
