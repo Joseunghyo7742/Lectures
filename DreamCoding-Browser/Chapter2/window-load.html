@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="test.js" defer></script>
+  </head>
+  <body>
+    <script>
+      //only document-html만 로드되면 완료 
+      window.addEventListener('DOMContentLoaded', () => {
+        console.log('DOMContentLoaded');
+      });
+      //after resource(css,image)- 모든 리소스가 다운된 다음에 발생.
+      window.addEventListener('load', () => {
+        console.log('load');
+      });
+
+      //before unload -사용자가 페이지를 나가기 전에 무언가를 해야 한다면 콜백함수로 처리할 수 있다.
+      window.addEventListener('beforeunload', () => {
+        console.log('beforeunload');
+      });
+      //resource is being unloaded
+      window.addEventListener('unload', () => {
+        console.log('unload');
+      });
+    </script>
+  </body>
+</html>
