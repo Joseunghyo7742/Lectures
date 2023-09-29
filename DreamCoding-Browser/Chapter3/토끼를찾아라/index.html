@@ -6,27 +6,39 @@
     <title>Scroll</title>
     <style>
       body {
-        text-align: center;
         background-color: black;
+        text-align: center; /*이미지가 margin으로 차있어서 중앙정렬이 안됨=> margin auto */
+      }
+      img {
+        display: block;
+        margin: auto;
+      }
+      button {
+        outline: none;
+        background-color: tomato;
+        color: white;
+        font-size: 32px;
+        cursor: pointer;
+        margin: 16px 0;
       }
     </style>
   </head>
   <body>
     <button>Find a rabbit</button>
-    <div class="carrot"><img src="./img/carrot.png" /></div>
-    <div class="carrot"><img src="./img/carrot.png" /></div>
-    <div class="carrot"><img src="./img/carrot.png" /></div>
-    <div class="carrot"><img src="./img/carrot.png" /></div>
-    <div class="carrot"><img src="./img/carrot.png" /></div>
-    <div class="carrot"><img src="./img/carrot.png" /></div>
-    <div class="rabbit"><img src="./img/rabbit.png" /></div>
-    <div class="carrot"><img src="./img/carrot.png" /></div>
-    <div class="carrot"><img src="./img/carrot.png" /></div>
+    <img src="./img/carrot.png" />
+    <img src="./img/carrot.png" />
+    <img src="./img/carrot.png" />
+    <img src="./img/carrot.png" />
+    <img src="./img/carrot.png" />
+    <img src="./img/carrot.png" />
+    <img id="rabbit" src="./img/rabbit.png" />
+    <img src="./img/carrot.png" />
+    <img src="./img/carrot.png" />
     <script>
-      const rabbit = document.querySelector('.rabbit');
+      const rabbit = document.querySelector('#rabbit');
       const button = document.querySelector('button');
       button.addEventListener('click', () => {
-        rabbit.scrollIntoView();
+        rabbit.scrollIntoView({ behavior: 'smooth' });
       });
     </script>
   </body>
