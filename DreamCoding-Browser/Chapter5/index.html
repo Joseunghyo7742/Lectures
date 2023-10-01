@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="list-container">
+      <h1 class="title">춘식이의 쇼핑리스트</h1>
+      <ul class="content"></ul>
+      <div class="input-container">
+        <input type="text" placeholder="뭐 사야 하징?" />
+        <button type="button" class="submit-btn">
+          <img class="submit-img" src="./img/inputBtn.png" />
+        </button>
+      </div>
+    </div>
+    <script>
+      console.log('reloaded?');
+      const submitBtn = document.querySelector('.submit-btn');
+      const list = document.querySelector('.content');
+      const buttonImg = document.querySelector('.submit-img');
+      const input = document.querySelector('input');
+
+      function addItem() {
+        const item = document.createElement('li');
+        const delBtn = document.createElement('button');
+        delBtn.setAttribute('class', 'delete-btn');
+        delBtn.innerHTML = `<img src="./img/delete.png"/>`;
+        item.innerText = input.value;
+        item.append(delBtn);
+        list.append(item);
+        input.value = '';
+
+        delBtn.addEventListener('click', (e) => {
+          //오ㅐ 안되지 delBtn.remove(e.currentTarget.parentElement)
+          list.removeChild(e.currentTarget.parentNode);
+        });
+      }
+
+      submitBtn.addEventListener('click', addItem);
+
+      //춘식이 윙크 핸들링
+      submitBtn.addEventListener('mouseleave', () => {
+        buttonImg.src = './img/inputBtn.png';
+      });
+      submitBtn.addEventListener('mouseenter', () => {
+        buttonImg.src = './img/done.png';
+      });
+    </script>
+  </body>
+</html>

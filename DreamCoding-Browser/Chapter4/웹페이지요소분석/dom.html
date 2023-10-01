@@ -23,7 +23,7 @@
       }
       img {
         z-index: 100;
-        {% comment %} will-change: opacity; {% endcomment %}
+        will-change: opacity; 
       }
       #second{
         transform: translate(-50px,50px);
@@ -51,6 +51,12 @@
       h2.setAttribute('class', 'title'); //key-value 전달해서 속성 추가 <h2 class="title">
       h2.textContent = 'this is a title';
       section.insertBefore(h2,h3)
+
+      section.innerHTML=`
+        <img src= 'img/avater.png' alt='avatar'/>
+        <h1 id="brand"> Dream Coding </h1>
+        
+      `
     </script>
   </body>
 </html>
