@@ -41,6 +41,11 @@
       }
 
       submitBtn.addEventListener('click', addItem);
+      input.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+          addItem();
+        }
+      });
 
       //춘식이 윙크 핸들링
       submitBtn.addEventListener('mouseleave', () => {
