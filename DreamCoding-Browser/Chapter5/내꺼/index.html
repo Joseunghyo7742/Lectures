@@ -7,47 +7,61 @@
     <title>Document</title>
   </head>
   <body>
-    <div class="list-container">
+    <div class="item__container">
       <h1 class="title">춘식이의 쇼핑리스트</h1>
-      <ul class="content"></ul>
-      <div class="input-container">
+      <ul class="items"></ul>
+      <div class="input__container">
         <input type="text" placeholder="뭐 사야 하징?" />
-        <button type="button" class="submit-btn">
-          <img class="submit-img" src="./img/inputBtn.png" />
+        <button type="button" class="submit__btn">
+          <img class="submit__img" src="./img/inputBtn.png" />
         </button>
       </div>
     </div>
     <script>
-      console.log('reloaded?');
-      const submitBtn = document.querySelector('.submit-btn');
-      const list = document.querySelector('.content');
-      const buttonImg = document.querySelector('.submit-img');
       const input = document.querySelector('input');
+      const items = document.querySelector('.items');
+      const submitBtn = document.querySelector('.submit__btn');
 
-      function addItem() {
+      function onSubmitBtn() {
+        const text = input.value;
+        if (text === '') {
+          input.focus();
+          return;
+        }
+        const item = createItem(text);
+        items.append(item);
+        item.scrollIntoView({ block: 'center' });
+        input.value = '';
+        input.focus();
+      }
+
+      function createItem(text) {
         const item = document.createElement('li');
         const delBtn = document.createElement('button');
-        delBtn.setAttribute('class', 'delete-btn');
+        delBtn.setAttribute('class', 'delete__btn');
         delBtn.innerHTML = `<img src="./img/delete.png"/>`;
         item.innerText = input.value;
         item.append(delBtn);
-        list.append(item);
-        input.value = '';
 
-        delBtn.addEventListener('click', (e) => {
-          //오ㅐ 안되지 delBtn.remove(e.currentTarget.parentElement)
-          list.removeChild(e.currentTarget.parentNode);
+        delBtn.addEventListener('click', () => {
+          items.removeChild(item);
         });
+
+        return item;
       }
 
-      submitBtn.addEventListener('click', addItem);
+      submitBtn.addEventListener('click', () => {
+        onSubmitBtn();
+      });
       input.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') {
-          addItem();
+          onSubmitBtn();
+          input.focus();
         }
       });
 
-      //춘식이 윙크 핸들링
+      //제출버튼 클릭시 버튼의 이미지 변경
+      const buttonImg = document.querySelector('.submit__img');
       submitBtn.addEventListener('mouseleave', () => {
         buttonImg.src = './img/inputBtn.png';
       });
