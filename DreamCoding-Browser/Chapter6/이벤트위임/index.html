@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="item__container">
+      <h1 class="title">춘식이의 쇼핑리스트</h1>
+      <ul class="items"></ul>
+      <div class="input__container">
+        <input type="text" placeholder="뭐 사야 하징?" />
+        <button type="button" class="submit__btn">
+          <img class="submit__img" src="./img/inputBtn.png" />
+        </button>
+      </div>
+    </div>
+    <script>
+      const input = document.querySelector('input');
+      const items = document.querySelector('.items');
+      const submitBtn = document.querySelector('.submit__btn');
+
+      function onSubmitBtn() {
+        const text = input.value;
+        if (text === '') {
+          input.focus();
+          return;
+        }
+        const item = createItem(text);
+        items.append(item);
+        item.scrollIntoView({ block: 'center' });
+        input.value = '';
+        input.focus();
+      }
+
+      function createItem(text) {
+        const item = document.createElement('li');
+        const delBtn = document.createElement('button');
+        delBtn.setAttribute('class', 'delete__btn');
+        delBtn.innerHTML = `<img src="./img/delete.png"/>`;
+        item.innerText = input.value;
+        item.append(delBtn);
+
+        return item;
+      }
+      //items에 listner를 등록하는데.  특정 calss에 대해서만 이벤트를 캐치할수없을까?
+      items.addEventListener('click', (event) => {
+        if (event.target.tagName === 'IMG') {
+          event.target.parentNode.parentNode.remove();
+        }
+      });
+      submitBtn.addEventListener('click', () => {
+        onSubmitBtn();
+      });
+      input.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+          onSubmitBtn();
+          input.focus();
+        }
+      });
+
+      //제출버튼 클릭시 버튼의 이미지 변경
+      const buttonImg = document.querySelector('.submit__img');
+      submitBtn.addEventListener('mouseleave', () => {
+        buttonImg.src = './img/inputBtn.png';
+      });
+      submitBtn.addEventListener('mouseenter', () => {
+        buttonImg.src = './img/done.png';
+      });
+    </script>
+  </body>
+</html>
