@@ -36,19 +36,22 @@
       }
 
       function createItem(text) {
+        const itemID = Math.random();
         const item = document.createElement('li');
+        item.setAttribute('id', itemID);
         const delBtn = document.createElement('button');
         delBtn.setAttribute('class', 'delete__btn');
-        delBtn.innerHTML = `<img src="./img/delete.png"/>`;
+        delBtn.innerHTML = `<img src="./img/delete.png" id="${itemID}"/>`;
         item.innerText = input.value;
         item.append(delBtn);
 
         return item;
       }
-      //items에 listner를 등록하는데.  특정 calss에 대해서만 이벤트를 캐치할수없을까?
       items.addEventListener('click', (event) => {
         if (event.target.tagName === 'IMG') {
-          event.target.parentNode.parentNode.remove();
+          //event.target.parentNode.parentNode.remove();
+          const target = document.getElementById(event.target.id);
+          items.removeChild(target);
         }
       });
       submitBtn.addEventListener('click', () => {
