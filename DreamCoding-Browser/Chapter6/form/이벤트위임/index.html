@@ -11,17 +11,19 @@
       <h1 class="title">춘식이의 쇼핑리스트</h1>
       <ul class="items"></ul>
       <div class="input__container">
-        <input type="text" placeholder="뭐 사야 하징?" />
-        <button type="button" class="submit__btn">
-          <img class="submit__img" src="./img/inputBtn.png" />
-        </button>
+        <form class="new_form">
+          <input type="text" placeholder="뭐 사야 하징?" />
+          <button type="submit" class="submit__btn">
+            <img class="submit__img" src="./img/inputBtn.png" />
+          </button>
+        </form>
       </div>
     </div>
     <script>
       const input = document.querySelector('input');
       const items = document.querySelector('.items');
       const submitBtn = document.querySelector('.submit__btn');
-
+      const form = document.querySelector('.new_form');
       function onSubmitBtn() {
         const text = input.value;
         if (text === '') {
@@ -52,14 +54,11 @@
           target.remove();
         }
       });
-      submitBtn.addEventListener('click', () => {
+
+      form.addEventListener('submit', (e) => {
+        e.preventDefault(); //submit 기본 새로고침 막기
         onSubmitBtn();
-      });
-      input.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') {
-          onSubmitBtn();
-          input.focus();
-        }
+        input.focus();
       });
 
       const buttonImg = document.querySelector('.submit__img');
