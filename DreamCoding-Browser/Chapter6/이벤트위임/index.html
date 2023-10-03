@@ -36,22 +36,20 @@
       }
 
       function createItem(text) {
-        const itemID = Math.random();
+        const itemID = Math.random(); //UUID를 사용하는게 좋긴하다
         const item = document.createElement('li');
         item.setAttribute('id', itemID);
-        const delBtn = document.createElement('button');
-        delBtn.setAttribute('class', 'delete__btn');
-        delBtn.innerHTML = `<img src="./img/delete.png" id="${itemID}"/>`;
-        item.innerText = input.value;
-        item.append(delBtn);
-
+        item.innerHTML = `
+        ${input.value}
+        <button class="delete__btn"><img src="./img/delete.png" id="${itemID}"/></button>
+        `;
         return item;
       }
       items.addEventListener('click', (event) => {
-        if (event.target.tagName === 'IMG') {
-          //event.target.parentNode.parentNode.remove();
-          const target = document.getElementById(event.target.id);
-          items.removeChild(target);
+        const id = event.target.id;
+        if (id) {
+          const target = document.querySelector(`li[id="${id}"]`);
+          target.remove();
         }
       });
       submitBtn.addEventListener('click', () => {
