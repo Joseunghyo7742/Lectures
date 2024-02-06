@@ -4,10 +4,11 @@ import { useState, useRef } from "react";
 export default function Player() {
   const playerName= useRef();
   const [name,setName]= useState(null);
- 
+
   function handleClick(){
     setName(playerName.current.value)
-    setSubmitted(true)
+    playerName.current.value=''
+
   }
   return (
     <section id="player">
