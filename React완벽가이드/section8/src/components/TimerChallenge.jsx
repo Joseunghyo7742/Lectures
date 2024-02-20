@@ -23,7 +23,6 @@ function TimerChallenge({title, targetTime}) {
     timer.current= setInterval(()=>{
       setTimeRemaining(prev=> prev-10)
     }, 10)
-    setTimerStarted(true)
   }
   function handleStop(){
     dialog.current.open()
