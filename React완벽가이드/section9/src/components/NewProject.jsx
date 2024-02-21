@@ -7,11 +7,12 @@ const formatted_today = today.toISOString().substring(0, 10);
 const NewProject = ({ onSaveProject }) => {
   const titleRef = useRef(null);
   const descriptionRef = useRef(null);
-  const [dueDate, setDueDate] = useState(formatted_today);
+  const dateRef = useRef(null);
 
   const handleSave = () => {
     const enteredTitle = titleRef.current.value;
     const enteredDescription = descriptionRef.current.value;
+    const dueDate = dateRef.current.value;
     onSaveProject({
       title: enteredTitle,
       description: enteredDescription,
@@ -38,17 +39,17 @@ const NewProject = ({ onSaveProject }) => {
       </menu>
       <div className="flex flex-col gap-2">
         <Input
+          type="text"
           ref={titleRef}
           label="Title"
           className="px-4 py-2 text-base font-normal border-b-2 border-stone-300 bg-stone-200 text-stone-600"
         />
         <Input ref={descriptionRef} label="Description" textarea />
         <Input
-          date
+          ref={dateRef}
+          type="date"
           label="Due Date"
-          value={dueDate}
           min={formatted_today}
-          onChange={(e) => setDueDate(e.target.value)}
         />
       </div>
     </div>
