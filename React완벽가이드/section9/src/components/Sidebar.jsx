@@ -10,9 +10,13 @@ const Sidebar = ({ onStartAddProject, projects }) => {
       <div>
         <Button onClick={onStartAddProject}>+ Add Project</Button>
       </div>
-      <ul>
+      <ul className="mt-8">
         {projects.map((prj) => (
-          <li key={prj.id}>{prj.title}</li>
+          <li key={prj.id}>
+            <button className="w-full px-2 py-1 text-left rounded-sm text-stone-400 hover:text-stone-200 hover:bg-stone-800">
+              {prj.title}
+            </button>
+          </li>
         ))}
       </ul>
     </aside>

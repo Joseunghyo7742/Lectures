@@ -19,7 +19,7 @@ const NewProject = ({ onSaveProject }) => {
       dueDate: dueDate,
     });
   };
-
+ 
   return (
     <div className="flex flex-col w-[35rem] gap-4 mt-16">
       <menu className="flex items-center justify-end gap-4 my-4">

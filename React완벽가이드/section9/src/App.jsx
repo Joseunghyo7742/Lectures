@@ -19,15 +19,20 @@ function App() {
   }
 
   function handleAddProject(prj) {
-    const pjid = nanoid(8);
+    const prjId = nanoid(8);
     setProjectsState((prev) => {
       const newProject = {
         ...prj,
-        id: pjid,
+        id: prjId,
       };
-      return { ...prev, projects: [...prev.projects, newProject] };
+      return {
+        ...prev,
+        selectedProjectId: undefined,
+        projects: [...prev.projects, newProject],
+      };
     });
   }
+
   let content;
   if (projectsState.selectedProjectId === null) {
     content = <NewProject onSaveProject={handleAddProject} />;
