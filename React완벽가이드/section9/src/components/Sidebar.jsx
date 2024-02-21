@@ -12,7 +12,7 @@ const Sidebar = ({ onStartAddProject, projects }) => {
       </div>
       <ul>
         {projects.map((prj) => (
-          <li>{prj.title}</li>
+          <li key={prj.id}>{prj.title}</li>
         ))}
       </ul>
     </aside>

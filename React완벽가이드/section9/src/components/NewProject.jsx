@@ -1,26 +1,21 @@
 import React, { useRef, useState } from 'react';
-import { nanoid } from 'nanoid';
 import Input from './Input';
 
 let today = new Date();
 const formatted_today = today.toISOString().substring(0, 10);
 
 const NewProject = ({ onSaveProject }) => {
-  const pjid = nanoid(8);
   const titleRef = useRef(null);
   const descriptionRef = useRef(null);
   const [dueDate, setDueDate] = useState(formatted_today);
 
-  const handleSaveButton = () => {
-    onSaveProject((prev) => {
-      const project = {
-        id: pjid,
-        title: titleRef.current.value,
-        description: descriptionRef.current.value,
-        dueDate: dueDate,
-      };
-      const newProjects = [...prev.projects, project];
-      return { selectedProjectId: undefined, projects: newProjects };
+  const handleSave = () => {
+    const enteredTitle = titleRef.current.value;
+    const enteredDescription = descriptionRef.current.value;
+    onSaveProject({
+      title: enteredTitle,
+      description: enteredDescription,
+      dueDate: dueDate,
     });
   };
 
@@ -34,7 +29,7 @@ const NewProject = ({ onSaveProject }) => {
         </li>
         <li>
           <button
-            onClick={handleSaveButton}
+            onClick={handleSave}
             className="px-4 py-2 text-xs font-bold rounded-md md:text-base bg-stone-800 text-stone-100 hover:bg-black hover:text-stone-50"
           >
             Save

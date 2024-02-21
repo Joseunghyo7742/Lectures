@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Sidebar from './components/Sidebar';
 import NewProject from './components/NewProject';
 import NoProjectSelected from './components/NoProjectSelected';
+import { nanoid } from 'nanoid';
 
 function App() {
   const [projectsState, setProjectsState] = useState({
@@ -17,9 +18,19 @@ function App() {
     });
   }
 
+  function handleAddProject(prj) {
+    const pjid = nanoid(8);
+    setProjectsState((prev) => {
+      const newProject = {
+        ...prj,
+        id: pjid,
+      };
+      return { ...prev, projects: [...prev.projects, newProject] };
+    });
+  }
   let content;
   if (projectsState.selectedProjectId === null) {
-    content = <NewProject onSaveProject={setProjectsState} />;
+    content = <NewProject onSaveProject={handleAddProject} />;
   } else if (projectsState.selectedProjectId === undefined) {
     content = <NoProjectSelected onStartAddProject={handleStartAddProject} />;
   }
