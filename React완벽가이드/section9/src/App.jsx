@@ -4,7 +4,7 @@ import NewProject from './components/NewProject';
 
 function App() {
   return (
-    <main className="flex h-screen gap-10 my-8">
+    <main className="flex h-screen gap-8 my-8">
       <Sidebar />
       <NewProject />
     </main>
