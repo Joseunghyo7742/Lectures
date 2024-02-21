@@ -3,6 +3,7 @@ import Sidebar from './components/Sidebar';
 import NewProject from './components/NewProject';
 import NoProjectSelected from './components/NoProjectSelected';
 import { nanoid } from 'nanoid';
+import Modal from './components/Modal';
 
 function App() {
   const [projectsState, setProjectsState] = useState({
@@ -41,6 +42,7 @@ function App() {
   }
   return (
     <main className="flex h-screen gap-8 my-8">
+      <Modal ref={dialogRef} />
       <Sidebar
         projects={projectsState.projects}
         onStartAddProject={handleStartAddProject}

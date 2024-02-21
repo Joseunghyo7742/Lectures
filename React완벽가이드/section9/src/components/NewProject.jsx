@@ -13,13 +13,24 @@ const NewProject = ({ onSaveProject }) => {
     const enteredTitle = titleRef.current.value;
     const enteredDescription = descriptionRef.current.value;
     const dueDate = dateRef.current.value;
+    const dialogRef = useRef();
+    //validation
+    if (
+      enteredTitle.trim() === '' ||
+      enteredDescription.trim() === '' ||
+      dueDate.trim() === ''
+    ) {
+      dialogRef.current.open();
+    }
+    //비어있는 값일 경우
+
     onSaveProject({
       title: enteredTitle,
       description: enteredDescription,
       dueDate: dueDate,
     });
   };
- 
+
   return (
     <div className="flex flex-col w-[35rem] gap-4 mt-16">
       <menu className="flex items-center justify-end gap-4 my-4">
