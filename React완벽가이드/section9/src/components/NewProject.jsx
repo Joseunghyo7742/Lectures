@@ -5,7 +5,7 @@ import Modal from './Modal';
 let today = new Date();
 const formatted_today = today.toISOString().substring(0, 10);
 
-const NewProject = ({ onSaveProject }) => {
+const NewProject = ({ onSaveProject, onCancle }) => {
   const titleRef = useRef(null);
   const descriptionRef = useRef(null);
   const dateRef = useRef(null);
@@ -36,14 +36,23 @@ const NewProject = ({ onSaveProject }) => {
   return (
     <>
       <Modal ref={modal} buttonCaption="Okay">
-        <h2> Invalid Input</h2>
-        <p> Opps.. looks like you forgot to enter a value</p>
-        <p>Please make sure you provide a valid value for every input field.</p>
+        <h2 className="mt-4 mb-4 text-xl font-bold text-stone-500">
+          Invalid Input
+        </h2>
+        <p className="mb-4 text-stone-700">
+          Opps.. looks like you forgot to enter a value
+        </p>
+        <p className="mb-4 text-stone-700">
+          Please make sure you provide a valid value for every input field.
+        </p>
       </Modal>
       <div className="flex flex-col w-[35rem] gap-4 mt-16">
         <menu className="flex items-center justify-end gap-4 my-4">
           <li>
-            <button className="px-4 py-2 text-xs font-bold bg-gray-100 rounded-md md:text-base text-stone-500 hover:bg-gray-200 hover:text-stone-800">
+            <button
+              onClick={onCancle}
+              className="px-4 py-2 text-xs font-bold bg-gray-100 rounded-md md:text-base text-stone-500 hover:bg-gray-200 hover:text-stone-800"
+            >
               Cancle
             </button>
           </li>
