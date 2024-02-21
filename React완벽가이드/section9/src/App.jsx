@@ -16,16 +16,19 @@ function App() {
       };
     });
   }
-  
+
   let content;
   if (projectsState.selectedProjectId === null) {
-    content = <NewProject  />;
+    content = <NewProject onSaveProject={setProjectsState} />;
   } else if (projectsState.selectedProjectId === undefined) {
     content = <NoProjectSelected onStartAddProject={handleStartAddProject} />;
   }
   return (
     <main className="flex h-screen gap-8 my-8">
-      <Sidebar onStartAddProject={handleStartAddProject} />
+      <Sidebar
+        projects={projectsState.projects}
+        onStartAddProject={handleStartAddProject}
+      />
       {content}
     </main>
   );
