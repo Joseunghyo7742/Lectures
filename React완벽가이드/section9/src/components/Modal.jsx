@@ -1,21 +1,20 @@
 import React, { forwardRef, useImperativeHandle, useRef } from 'react';
 import { createPortal } from 'react-dom';
 
-const Modal = forwardRef(({ title, message }, ref) => {
-  const dialogRef = useRef();
+const Modal = forwardRef(({ children, buttonCaption }, ref) => {
+  const dialog = useRef();
   useImperativeHandle(ref, () => {
     return {
       open() {
-        dialogRef.current.showModal();
+        dialog.current.showModal();
       },
     };
   });
   return createPortal(
-    <dialog ref={dialogRef}>
-      <h2>{title}</h2>
-      <p>{message}</p>
+    <dialog ref={dialog}>
+      {children}
       <form method="dialog">
-        <button>Confirm</button>
+        <button>{buttonCaption}</button>
       </form>
     </dialog>,
     document.getElementById('modal-root')
