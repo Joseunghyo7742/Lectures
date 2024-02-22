@@ -3,6 +3,7 @@ import Sidebar from './components/Sidebar';
 import NewProject from './components/NewProject';
 import NoProjectSelected from './components/NoProjectSelected';
 import { nanoid } from 'nanoid';
+import SelectedProject from './components/SelectedProject';
 
 function App() {
   const [projectsState, setProjectsState] = useState({
@@ -38,7 +39,17 @@ function App() {
     });
   }
 
-  let content;
+  function handleSelectedProject(id) {
+    setProjectsState((prev) => {
+      return { ...prev, selectedProjectId: id };
+    });
+  }
+
+  const selectedProject = projectsState.projects.find(
+    (project) => project.id === projectsState.selectedProjectId
+  );
+
+  let content = <SelectedProject project={selectedProject} />;
   if (projectsState.selectedProjectId === null) {
     content = (
       <NewProject
@@ -54,6 +65,7 @@ function App() {
       <Sidebar
         projects={projectsState.projects}
         onStartAddProject={handleStartAddProject}
+        onSelectProject={handleSelectedProject}
       />
       {content}
     </main>
