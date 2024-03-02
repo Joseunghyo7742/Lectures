@@ -7,12 +7,18 @@ import DeleteConfirmation from './components/DeleteConfirmation.jsx';
 import logoImg from './assets/logo.png';
 import { sortPlacesByDistance } from './loc.js';
 
+const storedIds = JSON.parse(localStorage.getItem('selectedPlace')) || [];
+const storedPlaces = storedIds.map((id) =>
+  AVAILABLE_PLACES.find((place) => place.id === id)
+);
 function App() {
   const modal = useRef();
   const selectedPlace = useRef();
-  const [pickedPlaces, setPickedPlaces] = useState([]);
+
+  const [pickedPlaces, setPickedPlaces] = useState(storedPlaces);
   const [availablePlaces, setAvailablePlaces] = useState([]);
 
+  //필요한 useEffect
   useEffect(() => {
     navigator.geolocation.getCurrentPosition((position) => {
       const sortedPlaces = sortPlacesByDistance(
@@ -20,7 +26,7 @@ function App() {
         position.coords.latitude,
         position.coords.longitude
       );
-      setAvailablePlaces(availablePlaces);
+      setAvailablePlaces(sortedPlaces);
     });
   }, []);
 
@@ -38,12 +44,12 @@ function App() {
       if (prevPickedPlaces.some((place) => place.id === id)) {
         return prevPickedPlaces;
       }
-      const place = AVAILABLE_PLACES.find(  (place) => place.id === id);
+      const place = AVAILABLE_PLACES.find((place) => place.id === id);
       return [place, ...prevPickedPlaces];
     });
-    //로컬스토리지에 저장하는 코든느 JSX코드와 직접적인 연관이 없다. 여기 안에서 useEffect 사용 불가. 
+    //로컬스토리지에 저장하는 코든느 JSX코드와 직접적인 연관이 없다. 여기 안에서 useEffect 사용 불가.
     const storedIds = JSON.parse(localStorage.getItem('selectedPlace')) || []; // 저장되어있던 객체 불러오기
-    if (storedIds.indexof(id) === -1) {
+    if (storedIds.indexOf(id) === -1) {
       localStorage.setItem('selectedPlace', JSON.stringify([id, ...storedIds]));
     }
   }
@@ -53,6 +59,12 @@ function App() {
       prevPickedPlaces.filter((place) => place.id !== selectedPlace.current)
     );
     modal.current.close();
+
+    const storedIds = JSON.parse(localStorage.getItem('selectedPlace')) || [];
+    localStorage.setItem(
+      'selectedPlace',
+      JSON.stringify(storedIds.filter((id) => id !== selectedPlace.current))
+    );
   }
 
   return (
