@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import Places from './Places.jsx';
 import Error from './Error.jsx';
 import { sortPlacesByDistance } from '../loc.js';
+import { fetchAvailablePlaces } from '../http.js';
 
 export default function AvailablePlaces({ onSelectPlace }) {
   const [availablePlaces, setAvailablePlaces] = useState([]);
@@ -12,16 +13,12 @@ export default function AvailablePlaces({ onSelectPlace }) {
     async function fetchPlaces() {
       setIsFetching(true);
       try {
-        const response = await fetch('http://localhost:3000/places');
-        const resData = await response.json();
-
-        if (!response.ok) {
-          const error = new Error('failed to fetch places');
-          throw error;
-        }
+        const places = await fetchAvailablePlaces();
+        //위 함수는 async함수이며, async함수들은 프로미스를 반환한다.
+        // 따라서 await으로 프로미스 객체를 받고
         navigator.geolocation.getCurrentPosition((position) => {
           const sortedPlaces = sortPlacesByDistance(
-            resData.places,
+            places,
             position.coords.latitude,
             position.coords.longitude
           );
