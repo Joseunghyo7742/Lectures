@@ -34,7 +34,7 @@ function shoppingCartReducer(state, action) {
           quantity: 1,
         });
       }
-      return { items: updatedItems };
+      return { ...state, items: updatedItems };
     case 'UPDATECART':
       const items = [...state.items];
       const updatedItemIndex = items.findIndex(
@@ -51,6 +51,7 @@ function shoppingCartReducer(state, action) {
         items[updatedItemIndex] = updateItem;
       }
       return {
+        ...state,
         items: items,
       };
     default:
