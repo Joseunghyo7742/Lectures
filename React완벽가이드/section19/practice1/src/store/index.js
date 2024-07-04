@@ -1,52 +1,53 @@
 //todo: 스토어만들기
 //todo: 리듀서 만들기
 
-import { createStore } from 'redux';
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, configureStore } from '@reduxjs/toolkit';
 
-const initialState = {
-  counter: 0,
+const initialCounterState = {
+  value: 0,
   showCounter: true,
 };
 
-createSlice({
+const counterSlice = createSlice({
   name: 'counter',
-  initialState: initialState,
+  initialState: initialCounterState,
   reducers: {
     increment(state) {
-      state.counter++;
+      state.value++;
     },
     decrement(state) {
-      state.counter--;
+      state.value--;
     },
     increase(state, action) {
-      state.counter = state.counter + action.amount;
+      state.value = state.value + action.payload;
     },
     toggleCounter(state) {
       state.showCounter = !state.showCounter;
     },
   },
 });
-const counterReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case 'increment':
-      return { counter: state.counter + 1, showCounter: state.showCounter };
-    case 'decrement':
-      return { counter: state.counter - 1, showCounter: state.showCounter };
-    case 'increase':
-      return {
-        counter: state.counter + action.amount,
-        showCounter: state.showCounter,
-      };
-    case 'toggle':
-      return {
-        showCounter: !state.showCounter,
-        counter: state.counter,
-      };
-    default:
-      return state;
-  }
+
+const initialAuthState = {
+  isAuthenticated: false,
 };
-const store = createStore(counterReducer);
+
+const authSlice = createSlice({
+  name: 'authentication',
+  initialState: initialAuthState,
+  reducers: {
+    login(state) {
+      state.isAuthenticated = true;
+    },
+    logout(state) {
+      state.isAuthenticated = false;
+    },
+  },
+});
+const store = configureStore({
+  reducer: { counter: counterSlice.reducer, auth: authSlice.reducer },
+}); //여러개의 리듀서들을 하나로 합침
+
+export const counterActions = counterSlice.actions;
+export const authActions = authSlice.actions;
 
 export default store;
